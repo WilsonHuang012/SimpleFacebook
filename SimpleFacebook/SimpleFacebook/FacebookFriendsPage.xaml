@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimpleFacebook.FacebookFriendsPage"
+             xmlns:viewModel="clr-namespace:SimpleFacebook.ViewModels"
+             Title="ListView">
+    <ContentPage.BindingContext>
+        <viewModel:FacebookViewModel></viewModel:FacebookViewModel>
+    </ContentPage.BindingContext>
+    <ListView ItemsSource="{Binding FacebookFriends}"
+            ItemTapped="Handle_ItemTapped"
+            ItemSelected="Handle_ItemSelected"
+            HasUnevenRows="true"
+            IsPullToRefreshEnabled="true"
+            CachingStrategy="RecycleElement"
+            Refreshing="ListView_Refreshing">
+    <ListView.Header>
+      <StackLayout Padding="10" 
+                   Orientation="Horizontal"
+                   HorizontalOptions="FillAndExpand"
+                   BackgroundColor="#dadada">
+        <Label Text="Header"
+               HorizontalTextAlignment="Center"
+               HorizontalOptions="FillAndExpand"
+               TextColor="Black"
+               FontAttributes="Bold"/>
+      </StackLayout>
+    </ListView.Header>
+    <!--Built in Cells-->
+    <ListView.ItemTemplate>
+      <DataTemplate>
+                <Grid  Padding="15,4,15,2" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image  Source="{Binding Picture.ImageItem.Data.Url}" Grid.Column="0"  Aspect="AspectFit" />
+                    <StackLayout Orientation="Vertical"  Grid.Column="1">
+                        <Label Text="{Binding FriendItem.ID}" FontSize="Medium" LineBreakMode="TailTruncation" />
+                        <Label Text="{Binding FriendItem.Name}" FontSize="Medium" LineBreakMode="TailTruncation" />
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+    </ListView.ItemTemplate>
+    
+    <!--Custom View Cells-->
+    <!--
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <StackLayout>
+            <Label Text="{Binding Text}" 
+                   Style="{DynamicResource ListItemTextStyle}" />
+            <Label Text="{Binding Detail}" 
+                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+          </StackLayout>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+    -->
+    
+  </ListView>
+</ContentPage>
