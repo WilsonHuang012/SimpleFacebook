@@ -46,7 +46,7 @@ namespace SimpleFacebook.ViewModels
             if (FacebookProfile != null)
             {
                 string userID = FacebookProfile.Id;
-                FacebookFriends = facebookHelper.GetFacebookProfileFriendAsync(accessToken ,userID).Result;
+                FacebookFriends = await facebookHelper.GetFacebookProfileFriendAsync(accessToken ,userID);
             }
         }
 
